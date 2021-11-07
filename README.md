@@ -10,9 +10,6 @@ This [terraform](https://www.terraform.io/) module will install a High Availabil
 - Network: Private network with one subnet.
 - Server and agent nodes are distributed across 3 Datacenters (nbg1, fsn1, hel1) for high availability.
 
-</br>
-</br>
-
 **Hetzner Cloud integration**:
 
 - Preinstalled [CSI-driver](https://github.com/hetznercloud/csi-driver) for volume support.
