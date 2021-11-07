@@ -99,7 +99,7 @@ locals {
   common_labels = {
     cluster     = var.name
     provisioner = "terraform",
-    module      = "k-andy"
+    module      = "k3s-davar"
     engine      = "k3s",
   }
 }
