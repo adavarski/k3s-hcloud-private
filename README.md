@@ -1,7 +1,7 @@
 # k3s-hcloud
 
 
-### Zero friction Kubernetes stack on Hetzner Cloud
+### Kubernetes stack on Hetzner Cloud (k3s-based)
 
 This [terraform](https://www.terraform.io/) module will install a High Availability [K3s](https://k3s.io/) Cluster with Embedded DB in a private network on [Hetzner Cloud](https://www.hetzner.com/de/cloud). The following resources are provisionised by default (**20€/mo**):
 
