@@ -304,6 +304,18 @@ $ terraform destroy:
 
 
 ```
+var.hcloud_token
+  Token to authenticate against Hetzner Cloud
+
+  Enter a value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+var.name
+  Cluster name (used in various places, don't use special chars)
+
+  Enter a value: k3s
+
+...
+
   Enter a value: yes
 
 
