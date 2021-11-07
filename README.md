@@ -175,7 +175,7 @@ Cloud init logs can be found on the remote machines in:
 ## Example:
 
 ```
-terraform apply
+$ terraform apply
 
 var.hcloud_token
   Token to authenticate against Hetzner Cloud
@@ -199,81 +199,108 @@ Apply complete! Resources: 17 added, 0 changed, 0 destroyed.
 Outputs:
 
 agents_public_ips = [
-  "49.12.226.241",
-  "49.12.5.242",
+  "49.12.225.212",
+  "23.88.123.16",
 ]
 control_planes_public_ips = [
   "23.88.107.54",
-  "23.88.123.16",
+  "49.12.5.242",
   "65.108.52.118",
 ]
+k3s_token = <sensitive>
+kubeconfig = <sensitive>
+kubeconfig_file = <sensitive>
+network_id = "1260727"
+ssh_private_key = <sensitive>
+```
 
+Check k8s:
+```
 $ export KUBECONFIG=./kubeconfig-k3s.yaml
 
 $ kubectl get node -o wide
-NAME                             STATUS   ROLES                       AGE     VERSION        INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
-k3s-control-plane-0              Ready    control-plane,etcd,master   3m18s   v1.21.3+k3s1   10.0.1.1      23.88.107.54    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
-k3s-control-plane-1              Ready    control-plane,etcd,master   88s     v1.21.3+k3s1   10.0.1.2      23.88.123.16    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
-k3s-control-plane-2              Ready    control-plane,etcd,master   104s    v1.21.3+k3s1   10.0.1.3      65.108.52.118   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
-k3s-default-0-sincere-sole       Ready    <none>                      2m8s    v1.21.3+k3s1   10.0.1.33     49.12.226.241   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
-k3s-default-1-evolved-bluebird   Ready    <none>                      2m8s    v1.21.3+k3s1   10.0.1.34     49.12.5.242     Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
-
+NAME                          STATUS   ROLES                       AGE    VERSION        INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+k3s-control-plane-0           Ready    control-plane,etcd,master   3m     v1.21.3+k3s1   10.0.1.1      23.88.107.54    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-control-plane-1           Ready    control-plane,etcd,master   71s    v1.21.3+k3s1   10.0.1.2      49.12.5.242     Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-control-plane-2           Ready    control-plane,etcd,master   88s    v1.21.3+k3s1   10.0.1.3      65.108.52.118   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-default-0-expert-marten   Ready    <none>                      101s   v1.21.3+k3s1   10.0.1.33     49.12.225.212   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-default-1-suited-hawk     Ready    <none>                      109s   v1.21.3+k3s1   10.0.1.34     23.88.123.16    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
 
 $ kubectl get all --all-namespaces
 NAMESPACE     NAME                                                   READY   STATUS    RESTARTS   AGE
-kube-system   pod/coredns-7448499f4d-pfhq8                           1/1     Running   0          8m27s
-kube-system   pod/hcloud-cloud-controller-manager-74b74b9b46-h2qrc   1/1     Running   0          8m22s
-kube-system   pod/hcloud-csi-controller-0                            5/5     Running   0          8m21s
-kube-system   pod/hcloud-csi-node-8625q                              3/3     Running   0          8m21s
-kube-system   pod/hcloud-csi-node-dq428                              3/3     Running   0          7m17s
-kube-system   pod/hcloud-csi-node-fqrfp                              3/3     Running   0          7m42s
-kube-system   pod/hcloud-csi-node-jrgp4                              3/3     Running   0          7m2s
-kube-system   pod/hcloud-csi-node-v7zps                              3/3     Running   0          7m42s
-kube-system   pod/metrics-server-86cbb8457f-f8glj                    1/1     Running   0          8m27s
+kube-system   pod/coredns-7448499f4d-w9ztt                           1/1     Running   0          2m53s
+kube-system   pod/hcloud-cloud-controller-manager-74b74b9b46-hk4wq   1/1     Running   0          2m48s
+kube-system   pod/hcloud-csi-controller-0                            5/5     Running   0          2m47s
+kube-system   pod/hcloud-csi-node-b6fdc                              3/3     Running   0          2m46s
+kube-system   pod/hcloud-csi-node-mlhnx                              3/3     Running   0          92s
+kube-system   pod/hcloud-csi-node-qzp2t                              3/3     Running   0          2m9s
+kube-system   pod/hcloud-csi-node-sgwrw                              3/3     Running   0          109s
+kube-system   pod/hcloud-csi-node-w9556                              3/3     Running   0          2m2s
+kube-system   pod/metrics-server-86cbb8457f-sw4rm                    1/1     Running   0          2m53s
 
 NAMESPACE     NAME                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
-default       service/kubernetes                      ClusterIP   10.43.0.1       <none>        443/TCP                  8m45s
-kube-system   service/hcloud-csi-controller-metrics   ClusterIP   10.43.222.192   <none>        9189/TCP                 8m21s
-kube-system   service/hcloud-csi-node-metrics         ClusterIP   10.43.156.32    <none>        9189/TCP                 8m21s
-kube-system   service/kube-dns                        ClusterIP   10.43.0.10      <none>        53/UDP,53/TCP,9153/TCP   8m40s
-kube-system   service/metrics-server                  ClusterIP   10.43.204.158   <none>        443/TCP                  8m39s
+default       service/kubernetes                      ClusterIP   10.43.0.1       <none>        443/TCP                  3m13s
+kube-system   service/hcloud-csi-controller-metrics   ClusterIP   10.43.239.98    <none>        9189/TCP                 2m47s
+kube-system   service/hcloud-csi-node-metrics         ClusterIP   10.43.251.254   <none>        9189/TCP                 2m46s
+kube-system   service/kube-dns                        ClusterIP   10.43.0.10      <none>        53/UDP,53/TCP,9153/TCP   3m10s
+kube-system   service/metrics-server                  ClusterIP   10.43.228.154   <none>        443/TCP                  3m8s
 
 NAMESPACE     NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-kube-system   daemonset.apps/hcloud-csi-node   5         5         5       5            5           <none>          8m21s
+kube-system   daemonset.apps/hcloud-csi-node   5         5         5       5            5           <none>          2m47s
 
 NAMESPACE     NAME                                              READY   UP-TO-DATE   AVAILABLE   AGE
-kube-system   deployment.apps/coredns                           1/1     1            1           8m40s
-kube-system   deployment.apps/hcloud-cloud-controller-manager   1/1     1            1           8m22s
-kube-system   deployment.apps/metrics-server                    1/1     1            1           8m39s
+kube-system   deployment.apps/coredns                           1/1     1            1           3m11s
+kube-system   deployment.apps/hcloud-cloud-controller-manager   1/1     1            1           2m49s
+kube-system   deployment.apps/metrics-server                    1/1     1            1           3m10s
 
 NAMESPACE     NAME                                                         DESIRED   CURRENT   READY   AGE
-kube-system   replicaset.apps/coredns-7448499f4d                           1         1         1       8m27s
-kube-system   replicaset.apps/hcloud-cloud-controller-manager-74b74b9b46   1         1         1       8m22s
-kube-system   replicaset.apps/metrics-server-86cbb8457f                    1         1         1       8m27s
+kube-system   replicaset.apps/coredns-7448499f4d                           1         1         1       2m55s
+kube-system   replicaset.apps/hcloud-cloud-controller-manager-74b74b9b46   1         1         1       2m49s
+kube-system   replicaset.apps/metrics-server-86cbb8457f                    1         1         1       2m55s
 
 NAMESPACE     NAME                                     READY   AGE
-kube-system   statefulset.apps/hcloud-csi-controller   1/1     8m21s
+kube-system   statefulset.apps/hcloud-csi-controller   1/1     2m48s
+
 ```
 
-Check LB:
+<img src="pictures/k3s-hcloud-servers.png" width="900">
+<img src="pictures/k3s-hcloud-networks.png" width="900">
+<img src="pictures/k3s-hcloud-ssh_keys.png" width="900">
+
+
+Check LB $ PVC :
 ```
 $ kubectl apply -f manifests/hello-kubernetes-default.yaml 
 deployment.apps/hello-kubernetes created
 service/hello-kubernetes created
 persistentvolumeclaim/csi-pvc created
 
-```
-<img src="pictures/k3s-final-servers.png" width="900">
-<img src="pictures/k3s-final-networks.png" width="900">
-<img src="pictures/k3s-final-ssh_key.png" width="900">
-<img src="pictures/k3s-final-volumes.png" width="900">
-<img src="pictures/kks-final-lb.png" width="900">
-<img src="pictures/k3s-final-hello-app.png" width="900">
 
+$ kubectl get all 
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/hello-kubernetes-6f8d7694bc-xstlz   1/1     Running   0          2m38s
+
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP                                    PORT(S)          AGE
+service/hello-kubernetes   LoadBalancer   10.43.231.169   10.0.1.4,162.55.152.168,2a01:4f8:1c1d:178::1   8080:30797/TCP   2m38s
+service/kubernetes         ClusterIP      10.43.0.1       <none>                                         443/TCP          9m34s
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello-kubernetes   1/1     1            1           2m38s
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/hello-kubernetes-6f8d7694bc   1         1         1       2m38s
+
+```
+
+<img src="pictures/k3s-hcloud-hello-volume.png" width="900">
+<img src="pictures/k3s-hcloud-hello-load_balancer.png" width="900">
+<img src="pictures/k3s-hcloud-hello.png" width="900">
 
 Clean: 
 
-delete LB via hcloud UI ... $ terraform destroy:
+delete LB via hcloud UI and -> 
+
+$ terraform destroy:
 
 
 ```
