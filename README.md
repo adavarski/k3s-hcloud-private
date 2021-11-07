@@ -263,12 +263,12 @@ service/hello-kubernetes created
 persistentvolumeclaim/csi-pvc created
 
 ```
-<img src="pictures/k3s-final-servers.png" width="600">
-<img src="pictures/k3s-final-networks.png" width="600">
-<img src="pictures/k3s-final-ssh_key.png" width="600">
-<img src="pictures/k3s-final-volumes.png" width="600">
-<img src="pictures/kks-final-lb.png" width="600">
-<img src="pictures/k3s-final-hello-app.png" width="600">
+<img src="pictures/k3s-final-servers.png" width="900">
+<img src="pictures/k3s-final-networks.png" width="900">
+<img src="pictures/k3s-final-ssh_key.png" width="900">
+<img src="pictures/k3s-final-volumes.png" width="900">
+<img src="pictures/kks-final-lb.png" width="900">
+<img src="pictures/k3s-final-hello-app.png" width="900">
 
 
 Clean: 
