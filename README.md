@@ -171,3 +171,468 @@ Cloud init logs can be found on the remote machines in:
 - [terraform-hcloud-k3s](https://github.com/cicdteam/terraform-hcloud-k3s) Terraform module which creates a single node cluster.
 - [terraform-module-k3](https://github.com/xunleii/terraform-module-k3s) Terraform module which creates a k3s cluster, with multi-server and management features.
 - Icon created by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/de/)
+
+## Example:
+
+```
+terraform apply
+
+var.hcloud_token
+  Token to authenticate against Hetzner Cloud
+
+  Enter a value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+var.name
+  Cluster name (used in various places, don't use special chars)
+
+  Enter a value: k3s
+  
+  ...
+  
+  
+  Enter a value: yes
+
+random_password.k3s_cluster_secret: Creating...
+random_password.k3s_cluster_secret: Creation complete after 0s [id=none]
+hcloud_network.k3s: Creating...
+hcloud_ssh_key.provision_public: Creating...
+hcloud_network.k3s: Creation complete after 3s [id=1260682]
+hcloud_network_subnet.k3s_nodes: Creating...
+hcloud_ssh_key.provision_public: Creation complete after 4s [id=4777097]
+hcloud_server.first_control_plane: Creating...
+hcloud_network_subnet.k3s_nodes: Creation complete after 3s [id=1260682-10.0.1.0/24]
+hcloud_server.first_control_plane: Still creating... [10s elapsed]
+hcloud_server.first_control_plane: Provisioning with 'remote-exec'...
+hcloud_server.first_control_plane (remote-exec): Connecting to remote host via SSH...
+hcloud_server.first_control_plane (remote-exec):   Host: 23.88.107.54
+hcloud_server.first_control_plane (remote-exec):   User: root
+hcloud_server.first_control_plane (remote-exec):   Password: false
+hcloud_server.first_control_plane (remote-exec):   Private key: true
+hcloud_server.first_control_plane (remote-exec):   Certificate: false
+hcloud_server.first_control_plane (remote-exec):   SSH Agent: true
+hcloud_server.first_control_plane (remote-exec):   Checking Host Key: false
+hcloud_server.first_control_plane (remote-exec):   Target Platform: unix
+hcloud_server.first_control_plane (remote-exec): Connecting to remote host via SSH...
+hcloud_server.first_control_plane (remote-exec):   Host: 23.88.107.54
+hcloud_server.first_control_plane (remote-exec):   User: root
+hcloud_server.first_control_plane (remote-exec):   Password: false
+hcloud_server.first_control_plane (remote-exec):   Private key: true
+hcloud_server.first_control_plane (remote-exec):   Certificate: false
+hcloud_server.first_control_plane (remote-exec):   SSH Agent: true
+hcloud_server.first_control_plane (remote-exec):   Checking Host Key: false
+hcloud_server.first_control_plane (remote-exec):   Target Platform: unix
+hcloud_server.first_control_plane: Still creating... [20s elapsed]
+hcloud_server.first_control_plane (remote-exec): Connecting to remote host via SSH...
+hcloud_server.first_control_plane (remote-exec):   Host: 23.88.107.54
+hcloud_server.first_control_plane (remote-exec):   User: root
+hcloud_server.first_control_plane (remote-exec):   Password: false
+hcloud_server.first_control_plane (remote-exec):   Private key: true
+hcloud_server.first_control_plane (remote-exec):   Certificate: false
+hcloud_server.first_control_plane (remote-exec):   SSH Agent: true
+hcloud_server.first_control_plane (remote-exec):   Checking Host Key: false
+hcloud_server.first_control_plane (remote-exec):   Target Platform: unix
+hcloud_server.first_control_plane (remote-exec): Connecting to remote host via SSH...
+hcloud_server.first_control_plane (remote-exec):   Host: 23.88.107.54
+hcloud_server.first_control_plane (remote-exec):   User: root
+hcloud_server.first_control_plane (remote-exec):   Password: false
+hcloud_server.first_control_plane (remote-exec):   Private key: true
+hcloud_server.first_control_plane (remote-exec):   Certificate: false
+hcloud_server.first_control_plane (remote-exec):   SSH Agent: true
+hcloud_server.first_control_plane (remote-exec):   Checking Host Key: false
+hcloud_server.first_control_plane (remote-exec):   Target Platform: unix
+hcloud_server.first_control_plane (remote-exec): Connected!
+hcloud_server.first_control_plane: Still creating... [30s elapsed]
+hcloud_server.first_control_plane: Still creating... [40s elapsed]
+hcloud_server.first_control_plane: Still creating... [50s elapsed]
+hcloud_server.first_control_plane: Still creating... [1m0s elapsed]
+hcloud_server.first_control_plane: Still creating... [1m10s elapsed]
+hcloud_server.first_control_plane (remote-exec): NAME                  STATUS   ROLES                       AGE   VERSION
+hcloud_server.first_control_plane (remote-exec): k3s-control-plane-0   Ready    control-plane,etcd,master   27s   v1.21.3+k3s1
+hcloud_server.first_control_plane (remote-exec): node/k3s-control-plane-0 tainted
+hcloud_server.first_control_plane (remote-exec): node/k3s-control-plane-0 tainted
+hcloud_server.first_control_plane (remote-exec): secret/hcloud created
+hcloud_server.first_control_plane (remote-exec): /tmp/terraform_1794469539.sh: 1: --cloud-provider=external: not found
+hcloud_server.first_control_plane (remote-exec): serviceaccount/cloud-controller-manager created
+hcloud_server.first_control_plane (remote-exec): clusterrolebinding.rbac.authorization.k8s.io/system:cloud-controller-manager created
+hcloud_server.first_control_plane (remote-exec): deployment.apps/hcloud-cloud-controller-manager created
+hcloud_server.first_control_plane (remote-exec): secret/hcloud-csi created
+hcloud_server.first_control_plane (remote-exec): csidriver.storage.k8s.io/csi.hetzner.cloud created
+hcloud_server.first_control_plane (remote-exec): storageclass.storage.k8s.io/hcloud-volumes created
+hcloud_server.first_control_plane (remote-exec): serviceaccount/hcloud-csi created
+hcloud_server.first_control_plane (remote-exec): clusterrole.rbac.authorization.k8s.io/hcloud-csi created
+hcloud_server.first_control_plane (remote-exec): clusterrolebinding.rbac.authorization.k8s.io/hcloud-csi created
+hcloud_server.first_control_plane (remote-exec): statefulset.apps/hcloud-csi-controller created
+hcloud_server.first_control_plane (remote-exec): daemonset.apps/hcloud-csi-node created
+hcloud_server.first_control_plane (remote-exec): service/hcloud-csi-controller-metrics created
+hcloud_server.first_control_plane (remote-exec): service/hcloud-csi-node-metrics created
+hcloud_server.first_control_plane: Creation complete after 1m20s [id=15796848]
+module.agent_group["default"].data.hcloud_image.ubuntu: Reading...
+data.remotefile.kubeconfig: Reading...
+hcloud_server_network.first_control_plane: Creating...
+hcloud_server.control_plane["#1"]: Creating...
+module.agent_group["default"].random_pet.agent_suffix[0]: Creating...
+module.agent_group["default"].random_pet.agent_suffix[0]: Creation complete after 0s [id=sincere-sole]
+hcloud_server.control_plane["#2"]: Creating...
+module.agent_group["default"].random_pet.agent_suffix[1]: Creating...
+module.agent_group["default"].random_pet.agent_suffix[1]: Creation complete after 0s [id=evolved-bluebird]
+module.agent_group["default"].data.hcloud_image.ubuntu: Read complete after 0s [name=ubuntu-20.04]
+module.agent_group["default"].hcloud_server.agent["#1"]: Creating...
+module.agent_group["default"].hcloud_server.agent["#0"]: Creating...
+data.remotefile.kubeconfig: Read complete after 1s [id=23.88.107.54:/etc/rancher/k3s/k3s.yaml]
+local_file.kubeconfig[0]: Creating...
+local_file.kubeconfig[0]: Creation complete after 0s [id=8d367f8fd330c657a0d5c1aff9308b677a122a4c]
+hcloud_server_network.first_control_plane: Creation complete after 2s [id=15796848-1260682]
+hcloud_server.control_plane["#1"]: Still creating... [10s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [10s elapsed]
+module.agent_group["default"].hcloud_server.agent["#1"]: Still creating... [10s elapsed]
+module.agent_group["default"].hcloud_server.agent["#0"]: Still creating... [10s elapsed]
+hcloud_server.control_plane["#2"]: Provisioning with 'remote-exec'...
+hcloud_server.control_plane["#2"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#2"] (remote-exec):   Host: 65.108.52.118
+hcloud_server.control_plane["#2"] (remote-exec):   User: root
+hcloud_server.control_plane["#2"] (remote-exec):   Password: false
+hcloud_server.control_plane["#2"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#2"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#2"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#2"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#2"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#1"]: Provisioning with 'remote-exec'...
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Host: 49.12.5.242
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#0"]: Provisioning with 'remote-exec'...
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Host: 49.12.226.241
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#2"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#2"] (remote-exec):   Host: 65.108.52.118
+hcloud_server.control_plane["#2"] (remote-exec):   User: root
+hcloud_server.control_plane["#2"] (remote-exec):   Password: false
+hcloud_server.control_plane["#2"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#2"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#2"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#2"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#2"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#1"]: Provisioning with 'remote-exec'...
+hcloud_server.control_plane["#1"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#1"] (remote-exec):   Host: 23.88.123.16
+hcloud_server.control_plane["#1"] (remote-exec):   User: root
+hcloud_server.control_plane["#1"] (remote-exec):   Password: false
+hcloud_server.control_plane["#1"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#1"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#1"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#1"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Host: 49.12.5.242
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Host: 49.12.226.241
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#2"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#2"] (remote-exec):   Host: 65.108.52.118
+hcloud_server.control_plane["#2"] (remote-exec):   User: root
+hcloud_server.control_plane["#2"] (remote-exec):   Password: false
+hcloud_server.control_plane["#2"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#2"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#2"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#2"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#2"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#1"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#1"] (remote-exec):   Host: 23.88.123.16
+hcloud_server.control_plane["#1"] (remote-exec):   User: root
+hcloud_server.control_plane["#1"] (remote-exec):   Password: false
+hcloud_server.control_plane["#1"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#1"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#1"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#1"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#1"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#1"]: Still creating... [20s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [20s elapsed]
+module.agent_group["default"].hcloud_server.agent["#1"]: Still creating... [20s elapsed]
+module.agent_group["default"].hcloud_server.agent["#0"]: Still creating... [20s elapsed]
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Host: 49.12.5.242
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Host: 49.12.226.241
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#2"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#2"] (remote-exec):   Host: 65.108.52.118
+hcloud_server.control_plane["#2"] (remote-exec):   User: root
+hcloud_server.control_plane["#2"] (remote-exec):   Password: false
+hcloud_server.control_plane["#2"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#2"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#2"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#2"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#2"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#1"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#1"] (remote-exec):   Host: 23.88.123.16
+hcloud_server.control_plane["#1"] (remote-exec):   User: root
+hcloud_server.control_plane["#1"] (remote-exec):   Password: false
+hcloud_server.control_plane["#1"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#1"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#1"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#1"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Host: 49.12.5.242
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec): Connecting to remote host via SSH...
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Host: 49.12.226.241
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   User: root
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Password: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Private key: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Certificate: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   SSH Agent: true
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Checking Host Key: false
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#1"] (remote-exec): Connected!
+module.agent_group["default"].hcloud_server.agent["#0"] (remote-exec): Connected!
+hcloud_server.control_plane["#1"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#1"] (remote-exec):   Host: 23.88.123.16
+hcloud_server.control_plane["#1"] (remote-exec):   User: root
+hcloud_server.control_plane["#1"] (remote-exec):   Password: false
+hcloud_server.control_plane["#1"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#1"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#1"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#1"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#1"] (remote-exec):   Target Platform: unix
+module.agent_group["default"].hcloud_server.agent["#0"]: Creation complete after 29s [id=15796865]
+module.agent_group["default"].hcloud_server.agent["#1"]: Creation complete after 29s [id=15796864]
+module.agent_group["default"].hcloud_server_network.agent["#0"]: Creating...
+module.agent_group["default"].hcloud_server_network.agent["#1"]: Creating...
+module.agent_group["default"].hcloud_server_network.agent["#0"]: Creation complete after 1s [id=15796865-1260682]
+module.agent_group["default"].hcloud_server_network.agent["#1"]: Creation complete after 1s [id=15796864-1260682]
+hcloud_server.control_plane["#1"]: Still creating... [30s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [30s elapsed]
+hcloud_server.control_plane["#2"] (remote-exec): Connecting to remote host via SSH...
+hcloud_server.control_plane["#2"] (remote-exec):   Host: 65.108.52.118
+hcloud_server.control_plane["#2"] (remote-exec):   User: root
+hcloud_server.control_plane["#2"] (remote-exec):   Password: false
+hcloud_server.control_plane["#2"] (remote-exec):   Private key: true
+hcloud_server.control_plane["#2"] (remote-exec):   Certificate: false
+hcloud_server.control_plane["#2"] (remote-exec):   SSH Agent: true
+hcloud_server.control_plane["#2"] (remote-exec):   Checking Host Key: false
+hcloud_server.control_plane["#2"] (remote-exec):   Target Platform: unix
+hcloud_server.control_plane["#1"] (remote-exec): Connected!
+hcloud_server.control_plane["#2"] (remote-exec): Connected!
+hcloud_server.control_plane["#1"]: Still creating... [40s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [40s elapsed]
+hcloud_server.control_plane["#1"]: Still creating... [50s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [50s elapsed]
+hcloud_server.control_plane["#1"]: Still creating... [1m0s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [1m0s elapsed]
+hcloud_server.control_plane["#1"]: Still creating... [1m10s elapsed]
+hcloud_server.control_plane["#2"]: Still creating... [1m10s elapsed]
+hcloud_server.control_plane["#2"] (remote-exec): NAME                  STATUS   ROLES                       AGE   VERSION
+hcloud_server.control_plane["#2"] (remote-exec): k3s-control-plane-2   Ready    control-plane,etcd,master   16s   v1.21.3+k3s1
+hcloud_server.control_plane["#2"] (remote-exec): node/k3s-control-plane-2 tainted
+hcloud_server.control_plane["#2"] (remote-exec): node/k3s-control-plane-2 tainted
+hcloud_server.control_plane["#2"]: Creation complete after 1m20s [id=15796862]
+hcloud_server.control_plane["#1"]: Still creating... [1m20s elapsed]
+hcloud_server.control_plane["#1"]: Still creating... [1m30s elapsed]
+hcloud_server.control_plane["#1"] (remote-exec): NAME                  STATUS   ROLES                       AGE   VERSION
+hcloud_server.control_plane["#1"] (remote-exec): k3s-control-plane-1   Ready    control-plane,etcd,master   12s   v1.21.3+k3s1
+hcloud_server.control_plane["#1"] (remote-exec): node/k3s-control-plane-1 tainted
+hcloud_server.control_plane["#1"] (remote-exec): node/k3s-control-plane-1 tainted
+hcloud_server.control_plane["#1"]: Creation complete after 1m32s [id=15796863]
+hcloud_server_network.control_plane["#1"]: Creating...
+hcloud_server_network.control_plane["#2"]: Creating...
+hcloud_server_network.control_plane["#2"]: Creation complete after 1s [id=15796862-1260682]
+hcloud_server_network.control_plane["#1"]: Creation complete after 3s [id=15796863-1260682]
+
+Apply complete! Resources: 17 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+agents_public_ips = [
+  "49.12.226.241",
+  "49.12.5.242",
+]
+control_planes_public_ips = [
+  "23.88.107.54",
+  "23.88.123.16",
+  "65.108.52.118",
+]
+
+$ export KUBECONFIG=./kubeconfig-k3s.yaml
+
+$ kubectl get node -o wide
+NAME                             STATUS   ROLES                       AGE     VERSION        INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+k3s-control-plane-0              Ready    control-plane,etcd,master   3m18s   v1.21.3+k3s1   10.0.1.1      23.88.107.54    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-control-plane-1              Ready    control-plane,etcd,master   88s     v1.21.3+k3s1   10.0.1.2      23.88.123.16    Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-control-plane-2              Ready    control-plane,etcd,master   104s    v1.21.3+k3s1   10.0.1.3      65.108.52.118   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-default-0-sincere-sole       Ready    <none>                      2m8s    v1.21.3+k3s1   10.0.1.33     49.12.226.241   Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+k3s-default-1-evolved-bluebird   Ready    <none>                      2m8s    v1.21.3+k3s1   10.0.1.34     49.12.5.242     Ubuntu 20.04.3 LTS   5.4.0-89-generic   containerd://1.4.8-k3s1
+
+
+$ kubectl get all --all-namespaces
+NAMESPACE     NAME                                                   READY   STATUS    RESTARTS   AGE
+kube-system   pod/coredns-7448499f4d-pfhq8                           1/1     Running   0          8m27s
+kube-system   pod/hcloud-cloud-controller-manager-74b74b9b46-h2qrc   1/1     Running   0          8m22s
+kube-system   pod/hcloud-csi-controller-0                            5/5     Running   0          8m21s
+kube-system   pod/hcloud-csi-node-8625q                              3/3     Running   0          8m21s
+kube-system   pod/hcloud-csi-node-dq428                              3/3     Running   0          7m17s
+kube-system   pod/hcloud-csi-node-fqrfp                              3/3     Running   0          7m42s
+kube-system   pod/hcloud-csi-node-jrgp4                              3/3     Running   0          7m2s
+kube-system   pod/hcloud-csi-node-v7zps                              3/3     Running   0          7m42s
+kube-system   pod/metrics-server-86cbb8457f-f8glj                    1/1     Running   0          8m27s
+
+NAMESPACE     NAME                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+default       service/kubernetes                      ClusterIP   10.43.0.1       <none>        443/TCP                  8m45s
+kube-system   service/hcloud-csi-controller-metrics   ClusterIP   10.43.222.192   <none>        9189/TCP                 8m21s
+kube-system   service/hcloud-csi-node-metrics         ClusterIP   10.43.156.32    <none>        9189/TCP                 8m21s
+kube-system   service/kube-dns                        ClusterIP   10.43.0.10      <none>        53/UDP,53/TCP,9153/TCP   8m40s
+kube-system   service/metrics-server                  ClusterIP   10.43.204.158   <none>        443/TCP                  8m39s
+
+NAMESPACE     NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+kube-system   daemonset.apps/hcloud-csi-node   5         5         5       5            5           <none>          8m21s
+
+NAMESPACE     NAME                                              READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns                           1/1     1            1           8m40s
+kube-system   deployment.apps/hcloud-cloud-controller-manager   1/1     1            1           8m22s
+kube-system   deployment.apps/metrics-server                    1/1     1            1           8m39s
+
+NAMESPACE     NAME                                                         DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/coredns-7448499f4d                           1         1         1       8m27s
+kube-system   replicaset.apps/hcloud-cloud-controller-manager-74b74b9b46   1         1         1       8m22s
+kube-system   replicaset.apps/metrics-server-86cbb8457f                    1         1         1       8m27s
+
+NAMESPACE     NAME                                     READY   AGE
+kube-system   statefulset.apps/hcloud-csi-controller   1/1     8m21s
+```
+
+Check LB:
+```
+$ kubectl apply -f manifests/hello-kubernetes-default.yaml 
+deployment.apps/hello-kubernetes created
+service/hello-kubernetes created
+persistentvolumeclaim/csi-pvc created
+
+```
+<img src="pictures/k3s-final-servers.png" width="600">
+<img src="pictures/k3s-final-networks.png" width="600">
+<img src="pictures/k3s-final-ssh_key.png" width="600">
+<img src="pictures/k3s-final-volumes.png" width="600">
+<img src="pictures/kks-final-lb.png" width="600">
+<img src="pictures/k3s-final-hello-app.png" width="600">
+
+
+Clean: 
+
+delete LB via hcloud UI ... terraform destroy:
+
+
+```
+  Enter a value: yes
+
+local_file.kubeconfig[0]: Destroying... [id=8d367f8fd330c657a0d5c1aff9308b677a122a4c]
+local_file.kubeconfig[0]: Destruction complete after 0s
+module.agent_group["default"].hcloud_server_network.agent["#0"]: Destroying... [id=15796865-1260682]
+hcloud_server_network.control_plane["#2"]: Destroying... [id=15796862-1260682]
+hcloud_server_network.first_control_plane: Destroying... [id=15796848-1260682]
+hcloud_server_network.control_plane["#1"]: Destroying... [id=15796863-1260682]
+module.agent_group["default"].hcloud_server_network.agent["#1"]: Destroying... [id=15796864-1260682]
+hcloud_server_network.control_plane["#2"]: Destruction complete after 2s
+hcloud_server_network.control_plane["#1"]: Destruction complete after 2s
+hcloud_server.control_plane["#2"]: Destroying... [id=15796862]
+hcloud_server.control_plane["#1"]: Destroying... [id=15796863]
+hcloud_server.control_plane["#2"]: Destruction complete after 0s
+module.agent_group["default"].hcloud_server_network.agent["#1"]: Destruction complete after 2s
+hcloud_server.control_plane["#1"]: Destruction complete after 1s
+module.agent_group["default"].hcloud_server_network.agent["#0"]: Destruction complete after 3s
+module.agent_group["default"].hcloud_server.agent["#1"]: Destroying... [id=15796864]
+module.agent_group["default"].hcloud_server.agent["#0"]: Destroying... [id=15796865]
+module.agent_group["default"].hcloud_server.agent["#1"]: Destruction complete after 0s
+module.agent_group["default"].hcloud_server.agent["#0"]: Destruction complete after 0s
+hcloud_server_network.first_control_plane: Destruction complete after 3s
+module.agent_group["default"].random_pet.agent_suffix[1]: Destroying... [id=evolved-bluebird]
+module.agent_group["default"].random_pet.agent_suffix[0]: Destroying... [id=sincere-sole]
+module.agent_group["default"].random_pet.agent_suffix[0]: Destruction complete after 0s
+module.agent_group["default"].random_pet.agent_suffix[1]: Destruction complete after 0s
+hcloud_network_subnet.k3s_nodes: Destroying... [id=1260682-10.0.1.0/24]
+hcloud_server.first_control_plane: Destroying... [id=15796848]
+hcloud_server.first_control_plane: Destruction complete after 1s
+hcloud_ssh_key.provision_public: Destroying... [id=4777097]
+random_password.k3s_cluster_secret: Destroying... [id=none]
+random_password.k3s_cluster_secret: Destruction complete after 0s
+hcloud_ssh_key.provision_public: Destruction complete after 0s
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 10s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 20s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 30s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 40s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 50s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m0s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m10s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m20s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m30s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m40s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 1m50s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m0s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m10s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m20s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m30s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m40s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 2m50s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m0s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m10s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m20s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m30s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m40s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 3m50s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 4m0s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 4m10s elapsed]
+hcloud_network_subnet.k3s_nodes: Still destroying... [id=1260682-10.0.1.0/24, 4m20s elapsed]
+hcloud_network_subnet.k3s_nodes: Destruction complete after 4m27s
+hcloud_network.k3s: Destroying... [id=1260682]
+hcloud_network.k3s: Destruction complete after 0s
+
+Destroy complete! Resources: 17 destroyed.
+
+
+```
+
+
