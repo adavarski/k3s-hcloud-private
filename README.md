@@ -295,7 +295,7 @@ replicaset.apps/hello-kubernetes-6f8d7694bc   1         1         1       2m38s
 
 Clean: 
 
-delete LB via hcloud UI and `terraform destroy` -> 
+delete `terraform destroy` and delete LB & Volume during destroy -> 
 
 $ terraform destroy:
 
@@ -322,4 +322,3 @@ Destroy complete! Resources: 17 destroyed.
 
 ```
 
-Delete Volume via hcloud UI
